@@ -43,6 +43,7 @@ while run:
                 player.setSpeed(0)
     
     # Adds speed and checks for collisions
+    ball.ballCollision(SCREEN_WIDTH, SCREEN_HEIGHT, player, opponent)
     player.paddleCollision(SCREEN_HEIGHT, False, ball)
     opponent.paddleCollision(SCREEN_HEIGHT, True, ball)
 
