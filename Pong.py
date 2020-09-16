@@ -17,9 +17,9 @@ bg_color = (0, 0, 0)
 paddle_color = (255, 255, 255)
 
 # Create player, opponent, and ball
-ball = Ball()
-player = Paddle()
-opponent = Paddle()
+ball = Ball((int)(SCREEN_WIDTH / 2 - 15), (int)(SCREEN_HEIGHT / 2 - 15), 30, 30)
+player = Paddle(SCREEN_WIDTH - 20, (int)(SCREEN_HEIGHT / 2 - 70), 10, 140)
+opponent = Paddle(10, (int)(SCREEN_HEIGHT / 2 - 70), 10, 140)
 
 # Main game loop
 run = True
@@ -34,14 +34,27 @@ while run:
             if event.key == pygame.K_UP:
                 player.setSpeed(-7)
             if event.key == pygame.K_DOWN:
-                player.setSPeed(7)
+                player.setSpeed(7)
             if event.key == pygame.K_ESCAPE: # Press Escape key to close game
                 run = False
         # If user releases movement key, reset speed to 0
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN or event.key == pygame.K_UP:
                 player.setSpeed(0)
-        
+    
+    # Adds speed and checks for collisions
+    player.paddleCollision(SCREEN_HEIGHT, False, ball)
+    opponent.paddleCollision(SCREEN_HEIGHT, True, ball)
+
+    # Draws all objects on screen
+    game.fill(bg_color)
+    pygame.draw.rect(game, paddle_color, player)
+    pygame.draw.rect(game, paddle_color, opponent)
+    pygame.draw.rect(game, paddle_color, ball)
+
+    # Update screen 90 times every second
+    pygame.display.update()
+    clock.tick(90)
 
 pygame.quit()
 quit()
