@@ -52,6 +52,7 @@ while run:
     pygame.draw.rect(game, paddle_color, player)
     pygame.draw.rect(game, paddle_color, opponent)
     pygame.draw.rect(game, paddle_color, ball)
+    pygame.draw.aaline(game, paddle_color, (SCREEN_WIDTH / 2, 0), (SCREEN_WIDTH / 2, SCREEN_HEIGHT))
 
     # Update screen 90 times every second
     pygame.display.update()
