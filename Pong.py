@@ -7,8 +7,8 @@ pygame.init()
 clock = pygame.time.Clock()
 
 # Screen variables and configuration
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 960
+SCREEN_WIDTH = 980
+SCREEN_HEIGHT = 660
 game = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Pong")
 
@@ -20,6 +20,10 @@ paddle_color = (255, 255, 255)
 ball = Ball((int)(SCREEN_WIDTH / 2 - 15), (int)(SCREEN_HEIGHT / 2 - 15), 30, 30)
 player = Paddle(SCREEN_WIDTH - 20, (int)(SCREEN_HEIGHT / 2 - 70), 10, 140)
 opponent = Paddle(10, (int)(SCREEN_HEIGHT / 2 - 70), 10, 140)
+
+# Score variables
+player_score = 0
+opponent_score = 0
 
 # Main game loop
 run = True
@@ -43,7 +47,7 @@ while run:
                 player.setSpeed(0)
     
     # Adds speed and checks for collisions
-    ball.ballCollision(SCREEN_WIDTH, SCREEN_HEIGHT, player, opponent)
+    ball.ballCollision(SCREEN_WIDTH, SCREEN_HEIGHT, player, opponent, player_score, opponent_score)
     player.paddleCollision(SCREEN_HEIGHT, False, ball)
     opponent.paddleCollision(SCREEN_HEIGHT, True, ball)
 
