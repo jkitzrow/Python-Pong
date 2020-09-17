@@ -18,22 +18,20 @@ class Ball(pygame.Rect):
     def getSpeedY(self):
         return self.ball_speed_y
     
-    def ballCollision(self, width, height, player, opponent, player_score, opponent_score):
+    def ballCollision(self, width, height, player, opponent):
         self.x += self.getSpeedX()
         self.y += self.getSpeedY()
 
         if self.top <= 0 or self.bottom >= height:
             self.setSpeedY(-self.getSpeedY())
         if self.left <= 0:
-            player_score += 1
+            player.scored()
             self.reset(width, height)
         if self.right >= width:
-            opponent_score += 1
+            opponent.scored()
             self.reset(width, height)
         if self.colliderect(player) or self.colliderect(opponent):
             self.setSpeedX(-self.getSpeedX())
-
-        print(player_score)
     
     def reset(self, width, height):
         self.center = ((int)(width / 2), (int)(height / 2))

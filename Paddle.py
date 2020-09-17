@@ -3,6 +3,7 @@ import pygame
 class Paddle(pygame.Rect):
     
     paddle_speed = 0
+    paddle_score = 0
 
     def setSpeed(self, speed):
         self.paddle_speed = speed
@@ -33,3 +34,17 @@ class Paddle(pygame.Rect):
                 self.top = 0
             if self.bottom >= height:
                 self.bottom = height
+
+    def getScore(self):
+        return self.paddle_score
+    
+    def scored(self):
+        self.paddle_score += 1
+
+    def updateScore(self, font, game, width, isAi):
+        paddle_text = font.render(f"{self.getScore()}", False, (255, 255, 255))
+
+        if isAi:
+            game.blit(paddle_text, ((int)(width / 2 - 40), 20))
+        else:
+            game.blit(paddle_text, ((int)(width / 2 + 30), 20))

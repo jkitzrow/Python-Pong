@@ -21,9 +21,9 @@ ball = Ball((int)(SCREEN_WIDTH / 2 - 15), (int)(SCREEN_HEIGHT / 2 - 15), 30, 30)
 player = Paddle(SCREEN_WIDTH - 20, (int)(SCREEN_HEIGHT / 2 - 70), 10, 140)
 opponent = Paddle(10, (int)(SCREEN_HEIGHT / 2 - 70), 10, 140)
 
-# Score variables
-player_score = 0
-opponent_score = 0
+# Score related variables
+font = pygame.font.SysFont("Arialbd", 40)
+time_at_score = 0
 
 # Main game loop
 run = True
@@ -47,7 +47,7 @@ while run:
                 player.setSpeed(0)
     
     # Adds speed and checks for collisions
-    ball.ballCollision(SCREEN_WIDTH, SCREEN_HEIGHT, player, opponent, player_score, opponent_score)
+    ball.ballCollision(SCREEN_WIDTH, SCREEN_HEIGHT, player, opponent)
     player.paddleCollision(SCREEN_HEIGHT, False, ball)
     opponent.paddleCollision(SCREEN_HEIGHT, True, ball)
 
@@ -57,6 +57,9 @@ while run:
     pygame.draw.rect(game, paddle_color, opponent)
     pygame.draw.rect(game, paddle_color, ball)
     pygame.draw.aaline(game, paddle_color, (SCREEN_WIDTH / 2, 0), (SCREEN_WIDTH / 2, SCREEN_HEIGHT))
+
+    player.updateScore(font, game, SCREEN_WIDTH, False)
+    opponent.updateScore(font, game, SCREEN_WIDTH ,True)
 
     # Update screen 90 times every second
     pygame.display.update()
