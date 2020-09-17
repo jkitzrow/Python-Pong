@@ -57,9 +57,11 @@ while run:
     pygame.draw.rect(game, paddle_color, ball)
     pygame.draw.aaline(game, paddle_color, (SCREEN_WIDTH / 2, 0), (SCREEN_WIDTH / 2, SCREEN_HEIGHT))
 
-    if ball.time_at_score != None:
-        ball.reset(SCREEN_WIDTH, SCREEN_HEIGHT)
+    # If somebody scored, hold ball for 2 seconds, then reset
+    if ball.getTimeScore() != None:
+        ball.reset(SCREEN_WIDTH, SCREEN_HEIGHT, font, game)
 
+    # Updates scores
     player.updateScore(font, game, SCREEN_WIDTH, False)
     opponent.updateScore(font, game, SCREEN_WIDTH ,True)
 
