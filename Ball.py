@@ -51,7 +51,7 @@ class Ball(pygame.Rect):
             self.setSpeedY(0)
 
             # Displays a countdown until ball is active again
-            countdown_text = font.render(f"{(int)(4 - (current_time - self.time_at_score) / 1000)}"
+            countdown_text = font.render("{}".format((int)(3 - (current_time - self.time_at_score) / 1000))
                 , False, (0, 0, 0))
             game.blit(countdown_text, (self.x + 9, self.y + 3))
 

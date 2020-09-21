@@ -42,7 +42,7 @@ class Paddle(pygame.Rect):
         self.paddle_score += 1
 
     def updateScore(self, font, game, width, isAi):
-        paddle_text = font.render(f"{self.getScore()}", False, (255, 255, 255))
+        paddle_text = font.render("{}".format(self.getScore()), False, (255, 255, 255))
 
         if isAi:
             game.blit(paddle_text, ((int)(width / 2 - 40), 20))
