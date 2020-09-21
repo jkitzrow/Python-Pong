@@ -35,10 +35,14 @@ class Ball(pygame.Rect):
         # If ball hits opponent side
         if self.left <= 0:
             player.scored()
+            opponent.resetPosition(width, height, True)
+            player.resetPosition(width, height, False)
             self.time_at_score = pygame.time.get_ticks()
         # If ball hits player side
         if self.right >= width:
             opponent.scored()
+            opponent.resetPosition(width, height, True)
+            player.resetPosition(width, height, False)
             self.time_at_score = pygame.time.get_ticks()
         # If ball hits a paddle
         if self.colliderect(player) or self.colliderect(opponent):

@@ -45,6 +45,8 @@ while run:
                 game_over = False
                 player.resetScore()
                 opponent.resetScore()
+                player.resetPosition(SCREEN_WIDTH, SCREEN_HEIGHT, False)
+                opponent.resetPosition(SCREEN_WIDTH, SCREEN_HEIGHT, True)
                 ball.setTimeScore(pygame.time.get_ticks())
                 ball.reset(SCREEN_WIDTH, SCREEN_HEIGHT, font, game)
         # If user releases movement key, reset speed to 0
@@ -53,16 +55,18 @@ while run:
                 player.setSpeed(0)
     
     # Adds speed and checks for collisions
-    ball.ballCollision(SCREEN_WIDTH, SCREEN_HEIGHT, player, opponent)
-    player.paddleCollision(SCREEN_HEIGHT, False, ball)
-    opponent.paddleCollision(SCREEN_HEIGHT, True, ball)
+    if not game_over:
+        ball.ballCollision(SCREEN_WIDTH, SCREEN_HEIGHT, player, opponent)
+        player.paddleCollision(SCREEN_HEIGHT, False, ball)
+        opponent.paddleCollision(SCREEN_HEIGHT, True, ball)
 
     # Draws all objects on screen
-    game.fill(bg_color)
-    pygame.draw.rect(game, paddle_color, player)
-    pygame.draw.rect(game, paddle_color, opponent)
-    pygame.draw.rect(game, paddle_color, ball)
-    pygame.draw.aaline(game, paddle_color, (SCREEN_WIDTH / 2, 0), (SCREEN_WIDTH / 2, SCREEN_HEIGHT))
+    if not game_over:
+        game.fill(bg_color)
+        pygame.draw.rect(game, paddle_color, player)
+        pygame.draw.rect(game, paddle_color, opponent)
+        pygame.draw.rect(game, paddle_color, ball)
+        pygame.draw.aaline(game, paddle_color, (SCREEN_WIDTH / 2, 0), (SCREEN_WIDTH / 2, SCREEN_HEIGHT))
 
     # If somebody scored, hold ball for 2 seconds, then reset
     if ball.getTimeScore() != None:
