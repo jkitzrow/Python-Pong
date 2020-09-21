@@ -22,6 +22,9 @@ class Ball(pygame.Rect):
     def getTimeScore(self):
         return self.time_at_score
     
+    def setTimeScore(self, time):
+        self.time_at_score = time
+    
     def ballCollision(self, width, height, player, opponent):
         self.x += self.getSpeedX()
         self.y += self.getSpeedY()

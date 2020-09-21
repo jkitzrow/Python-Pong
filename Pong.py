@@ -26,6 +26,7 @@ font = pygame.font.SysFont("Arialbd", 40)
 
 # Main game loop
 run = True
+game_over = False
 while run:
 
     for event in pygame.event.get():
@@ -40,6 +41,12 @@ while run:
                 player.setSpeed(7)
             if event.key == pygame.K_ESCAPE: # Press Escape key to close game
                 run = False
+            if event.key == pygame.K_r and game_over == True:
+                game_over = False
+                player.resetScore()
+                opponent.resetScore()
+                ball.setTimeScore(pygame.time.get_ticks())
+                ball.reset(SCREEN_WIDTH, SCREEN_HEIGHT, font, game)
         # If user releases movement key, reset speed to 0
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN or event.key == pygame.K_UP:
@@ -62,8 +69,8 @@ while run:
         ball.reset(SCREEN_WIDTH, SCREEN_HEIGHT, font, game)
 
     # Updates scores
-    player.updateScore(font, game, SCREEN_WIDTH, False)
-    opponent.updateScore(font, game, SCREEN_WIDTH ,True)
+    if player.updateScore(font, game, SCREEN_WIDTH, SCREEN_HEIGHT, False) or opponent.updateScore(font, game, SCREEN_WIDTH, SCREEN_HEIGHT ,True):
+        game_over = True
 
     # Update screen 90 times every second
     pygame.display.update()

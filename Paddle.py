@@ -40,11 +40,25 @@ class Paddle(pygame.Rect):
     
     def scored(self):
         self.paddle_score += 1
+    
+    def resetScore(self):
+        self.paddle_score = 0
 
-    def updateScore(self, font, game, width, isAi):
+    def updateScore(self, font, game, width, height, isAi):
         paddle_text = font.render("{}".format(self.getScore()), False, (255, 255, 255))
 
         if isAi:
             game.blit(paddle_text, ((int)(width / 2 - 40), 20))
         else:
             game.blit(paddle_text, ((int)(width / 2 + 30), 20))
+
+        if self.getScore() == 1:
+            game_over_text = font.render("Game Over. You Win!", False, (0, 0, 0))
+            restart_text = font.render("Press (R) to restart, or (ESC) to exit.", False, (0, 0, 0))
+            game.fill((255, 255, 255))
+            game.blit(game_over_text, ((int)(width / 3), 40))
+            game.blit(restart_text, ((int)(width / 3), ((int)(height - 100))))
+            
+            return True
+        
+        return False
