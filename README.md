@@ -6,4 +6,4 @@ This is a simple recreation of Pong in python. The project was written to work w
 
 Below is a picture from the game:
 
-[pong picture](/resources/pong.png)
+![pong picture](/resources/pong.png)
